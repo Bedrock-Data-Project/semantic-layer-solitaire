@@ -1,0 +1,44 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_kpis.json
+kpis:
+  active_users:
+    select: SUM({property.cohort_size})
+    where: '{property.days_since_last_active} <= 90'
+    x_axis:
+      date: {}
+      cohort_day: {}
+  dau:
+    label: DAU
+    select: SUM({property.dau_active})
+    x_axis:
+      date: {total_function: avg}
+      cohort_day: {}
+  mau:
+    label: MAU
+    select: SUM({property.mau_active})
+    x_axis:
+      date: {total_function: avg}
+      cohort_day: {}
+  mau_lost:
+    label: MAU Lost
+    select: SUM({property.cohort_size})
+    where: '{property.days_since_last_active} = 27'
+    x_axis:
+      date: {}
+      cohort_day: {}
+  retention:
+    select: SAFE_DIVIDE({kpi.dau} * 100, SUM({property.cohort_size}))
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      cohort_day: {}
+  retention_d{}:
+    select: SAFE_DIVIDE({kpi.dau} * 100, SUM({property.cohort_size}))
+    where: '{property.cohort_day} = {}'
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      date: {}
+    template: cohort_day
+  stickiness:
+    select: SAFE_DIVIDE({kpi.dau} * 100, {kpi.mau})
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      date: {}

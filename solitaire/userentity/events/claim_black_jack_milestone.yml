@@ -1,0 +1,50 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/event_logical_table.json
+table_name: solitaire.claim_black_jack_milestone
+tags: [registration_event, activity_event]
+columns:
+  _id: {data_type: STRING}
+  _language: {data_type: STRING}
+  user_level_mapped_level: {data_type: INTEGER}
+  build_number: {data_type: INTEGER}
+  current_scene: {data_type: STRING}
+  user_level: {data_type: INTEGER}
+  model: {data_type: STRING}
+  total_played_levels: {data_type: STRING}
+  _user:
+    data_type: INTEGER
+    tags: [entity_id_column]
+  total_ads_watched: {data_type: STRING}
+  _time:
+    data_type: DATETIME
+    tags: [event_timestamp_column]
+  _version: {data_type: STRING}
+  settings_version: {data_type: INTEGER}
+  cohort_day: {data_type: INTEGER}
+  gpu: {data_type: STRING}
+  graphics_memory: {data_type: STRING}
+  _session_id: {data_type: INTEGER}
+  _platform: {data_type: STRING, tags: [registration_property]}
+  _country: {data_type: STRING, tags: [registration_property]}
+  total_amount_spent: {data_type: STRING}
+  _start_version: {data_type: STRING}
+  milestone_index: {data_type: STRING}
+  win_rate: {data_type: STRING}
+  system_memory: {data_type: STRING}
+  device_type_enum: {data_type: STRING}
+  user_journey_group: {data_type: STRING}
+  reg_build_number: {data_type: INTEGER}
+  sandbox_type: {data_type: STRING}
+  reg_version: {data_type: STRING}
+  install_model: {data_type: STRING}
+  install_store: {data_type: STRING}
+  registration_build_number: {data_type: STRING}
+  registration_version: {data_type: STRING}
+  native_width: {data_type: STRING}
+  native_height: {data_type: STRING}
+  notification_permission: {data_type: STRING}
+  skips_spent: {data_type: STRING}
+  first_session: {data_type: STRING}
+  date:
+    data_type: DATE
+    tags: [date_column]
+enrichments: []

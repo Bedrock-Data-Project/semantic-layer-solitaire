@@ -1,0 +1,43 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_properties.json
+properties:
+  dau_active:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    event_property: {source_event: entity_activity, select: 1, aggregate_function: none, default_value: 0}
+  was_active_on_day:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{dau_active}'
+      value_mappings:
+      - {constant: 0, new_value: Inactive on day}
+      - {constant: 1, new_value: Active on day}
+  days_active_last_7_days:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    sliding_window_property: {source_property: dau_active, window_function: sum, relative_days_from: -6, relative_days_to: 0}
+  days_active_last_28_days:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    sliding_window_property: {source_property: dau_active, window_function: sum, relative_days_from: -27, relative_days_to: 0}
+  mau_active:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    sliding_window_property: {source_property: dau_active, window_function: sum, relative_days_from: -27, relative_days_to: 0}
+  days_since_last_active:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    computed_property: {select: 'DATE_DIFF({date}, {last_activity_date}, DAY)'}
+  last_activity_date:
+    data_type: DATE
+    can_filter: true
+    can_group_by: true
+    lifetime_property:
+      source_event_property: {source_event: entity_activity, select: '{date}', aggregate_function: last_value}
+      merge_function: last_value

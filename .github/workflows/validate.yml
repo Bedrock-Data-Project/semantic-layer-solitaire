@@ -1,0 +1,23 @@
+name: Validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Validate
+        uses: Bedrock-Data-Project/asemic-cli-action@main
+        with:
+          version: 'latest'
+          token: ${{ secrets.ASEMIC_API_TOKEN }}
+          app_id_dir: solitaire
+          command: config validate
+

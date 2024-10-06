@@ -1,0 +1,27 @@
+name: Backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      dateFrom:
+        description: 'Backfill data from this date'
+        required: true
+      dateTo:
+        description: 'Backfill data to this date'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Validate
+        uses: Bedrock-Data-Project/asemic-cli-action@main
+        with:
+          version: 'latest'
+          token: ${{ secrets.ASEMIC_API_TOKEN }}
+          app_id_dir: solitaire
+          command: user-entity-model backfill --date-from=${{ github.event.inputs.dateFrom }} --date-to=${{ github.event.inputs.dateTo }}

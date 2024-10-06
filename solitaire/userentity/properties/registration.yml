@@ -1,0 +1,27 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_properties.json
+properties:
+  registration_date:
+    data_type: DATE
+    can_filter: true
+    can_group_by: true
+    registration_property: {source_column: date}
+  registration__platform:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    registration_property: {source_column: _platform}
+  registration__country:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    registration_property: {source_column: _country}
+  cohort_day:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    computed_property: {select: 'DATE_DIFF({date}, {registration_date}, DAY)'}
+  cohort_size:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    computed_property: {select: 1}

@@ -1,0 +1,7 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_kpis.json
+kpis:
+  registrations:
+    select: SUM({property.cohort_size})
+    where: '{property.cohort_day} = 0'
+    x_axis:
+      date: {}
