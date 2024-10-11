@@ -24,4 +24,4 @@ jobs:
           version: 'latest'
           token: ${{ secrets.ASEMIC_API_TOKEN }}
           app_id_dir: solitaire
-          command: user-entity-model backfill --date-from=${{ github.event.inputs.dateFrom }} --date-to=${{ github.event.inputs.dateTo }}
+          command: user-entity-model backfill --date-from=${{ github.event.inputs.dateFrom }} --date-to=${{ github.event.inputs.dateTo }} --days-per-query=30
