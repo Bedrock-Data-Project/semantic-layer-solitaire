@@ -1,10 +1,10 @@
 # $schema: http://schema.asemicanalytics.com/v1/semantic_layer/event_logical_table.json
-table_name: solitaire.ad_revenue
+table_name: solitaire.v_ad_revenue
 tags: [registration_event, activity_event]
 columns:
   _id: {data_type: STRING}
   _language: {data_type: STRING}
-  __revenue: {data_type: STRING}
+  __revenue: {data_type: NUMBER}
   ad_version_report: {data_type: STRING}
   notification_permission: {data_type: STRING}
   user_level_mapped_level: {data_type: INTEGER}
@@ -17,7 +17,7 @@ columns:
   model: {data_type: STRING}
   total_played_levels: {data_type: STRING}
   _user:
-    data_type: INTEGER
+    data_type: STRING
     tags: [entity_id_column]
   total_ads_watched: {data_type: STRING}
   _time:

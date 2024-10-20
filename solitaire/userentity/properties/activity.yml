@@ -29,11 +29,6 @@ properties:
     can_filter: false
     can_group_by: false
     sliding_window_property: {source_property: dau_active, window_function: sum, relative_days_from: -27, relative_days_to: 0}
-  days_since_last_active:
-    data_type: INTEGER
-    can_filter: true
-    can_group_by: true
-    computed_property: {select: 'DATE_DIFF({date}, {last_activity_date}, DAY)'}
   last_activity_date:
     data_type: DATE
     can_filter: true
@@ -41,3 +36,28 @@ properties:
     lifetime_property:
       source_event_property: {source_event: entity_activity, select: '{date}', aggregate_function: last_value}
       merge_function: last_value
+  days_since_last_active:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    computed_property: {select: 'DATE_DIFF({date}, {last_activity_date}, DAY)'}
+  previous_days_since_last_active:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    sliding_window_property: {source_property: days_since_last_active, window_function: max, relative_days_from: -1, relative_days_to: -1}
+  mau_lost:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: false
+    computed_property: {select: 'if({days_since_last_active} = 28, 1, 0)'}
+  mau_reactivated:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: false
+    computed_property: {select: 'if({previous_days_since_last_active} = 28 and {days_since_last_active} = 0, 1, 0)'}
+  logins:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    event_property: {source_event: login_finished, select: 'COUNT(*)', aggregate_function: none, default_value: 0}

@@ -1,0 +1,17 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_properties.json
+properties:
+  total_revenue_on_day:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    computed_property: {select: '{iap_revenue_on_day} + {ads_revenue_on_day}'}
+  total_revenue_last_28_days:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    sliding_window_property: {source_property: total_revenue_on_day, window_function: sum, relative_days_from: -27, relative_days_to: 0}
+  total_revenue_lifetime:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    lifetime_property: {source_property: total_revenue_on_day, merge_function: sum}

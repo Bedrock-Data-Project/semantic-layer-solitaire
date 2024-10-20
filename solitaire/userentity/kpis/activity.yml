@@ -20,8 +20,13 @@ kpis:
       cohort_day: {}
   mau_lost:
     label: MAU Lost
-    select: SUM({property.cohort_size})
-    where: '{property.days_since_last_active} = 27'
+    select: SUM({property.mau_lost})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  mau_reactivated:
+    label: MAU Lost
+    select: SUM({property.mau_reactivated})
     x_axis:
       date: {}
       cohort_day: {}
@@ -42,3 +47,8 @@ kpis:
     unit: {symbol: '%', is_prefix: false}
     x_axis:
       date: {}
+  average_logins:
+    select: SAFE_DIVIDE(SUM({property.logins}), SUM({kpi.dau}))
+    x_axis:
+      date: {}
+      cohort_day: {}

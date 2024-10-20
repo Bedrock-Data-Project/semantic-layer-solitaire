@@ -1,5 +1,5 @@
 # $schema: http://schema.asemicanalytics.com/v1/semantic_layer/event_logical_table.json
-table_name: solitaire.level_finished
+table_name: solitaire.v_level_finished
 tags: [registration_event, activity_event]
 columns:
   _id: {data_type: STRING}
@@ -12,7 +12,7 @@ columns:
   undo_spent: {data_type: STRING}
   build_number: {data_type: INTEGER}
   current_scene: {data_type: STRING}
-  duration: {data_type: STRING}
+  duration: {data_type: NUMBER}
   user_level: {data_type: INTEGER}
   remaining_cards: {data_type: STRING}
   max_stock_consecutive: {data_type: STRING}
@@ -81,22 +81,22 @@ columns:
   total_played_levels: {data_type: STRING}
   native_width: {data_type: STRING}
   native_height: {data_type: STRING}
-  wallet__trash_can_power_up: {data_type: STRING}
+  wallet__trash_can_power_up: {data_type: NUMBER}
   wallet_skip_it: {data_type: STRING}
   wallet_card_mastery_bonus: {data_type: STRING}
   wallet_reward_mastery_bonus: {data_type: STRING}
   wallet_undo_unlimited: {data_type: STRING}
   lucky_guess_currency: {data_type: STRING}
   wallet_lives: {data_type: STRING}
-  wallet_coins: {data_type: STRING}
+  wallet_coins: {data_type: NUMBER}
   black_jack_currency: {data_type: STRING}
-  wallet_undo: {data_type: STRING}
-  wallet_extra_cards: {data_type: STRING}
-  wallet__broom_power_up: {data_type: STRING}
-  wallet_wildcard: {data_type: STRING}
+  wallet_undo: {data_type: NUMBER}
+  wallet_extra_cards: {data_type: NUMBER}
+  wallet__broom_power_up: {data_type: NUMBER}
+  wallet_wildcard: {data_type: NUMBER}
   wallet_lives_unlimited: {data_type: STRING}
   wallet_wildcard_unlimited: {data_type: STRING}
-  wallet__transform_joker_power_up: {data_type: STRING}
+  wallet__transform_joker_power_up: {data_type: NUMBER}
   wallet_free_lives: {data_type: STRING}
   wallet_stars: {data_type: STRING}
   notification_permission: {data_type: STRING}

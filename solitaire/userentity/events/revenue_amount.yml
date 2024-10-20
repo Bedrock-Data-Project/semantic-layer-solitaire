@@ -1,5 +1,5 @@
 # $schema: http://schema.asemicanalytics.com/v1/semantic_layer/event_logical_table.json
-table_name: solitaire.revenue_amount
+table_name: solitaire.v_revenue_amount
 tags: [registration_event, activity_event]
 columns:
   _id: {data_type: STRING}
@@ -9,7 +9,7 @@ columns:
   currency_code: {data_type: STRING}
   current_scene: {data_type: STRING}
   user_level: {data_type: INTEGER}
-  price: {data_type: STRING}
+  price: {data_type: NUMBER}
   model: {data_type: STRING}
   _user:
     data_type: INTEGER
@@ -20,9 +20,9 @@ columns:
   _version: {data_type: STRING}
   settings_version: {data_type: INTEGER}
   __product_id: {data_type: STRING}
-  __quantity: {data_type: STRING}
+  __quantity: {data_type: INTEGER}
   cohort_day: {data_type: INTEGER}
-  __price: {data_type: STRING}
+  __price: {data_type: NUMBER}
   gpu: {data_type: STRING}
   graphics_memory: {data_type: STRING}
   _session_id: {data_type: INTEGER}

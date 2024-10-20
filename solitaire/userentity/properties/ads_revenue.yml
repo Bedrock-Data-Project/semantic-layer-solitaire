@@ -1,0 +1,54 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_properties.json
+properties:
+  ads_revenue_on_day:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    event_property: {source_event: ad_revenue, select: '{__revenue}', aggregate_function: sum, default_value: 0}
+  ads_revenue_last_28_days:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    sliding_window_property: {source_property: ads_revenue_on_day, window_function: sum, relative_days_from: -27, relative_days_to: 0}
+  ads_revenue_lifetime:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    lifetime_property: {source_property: revenue_on_day, merge_function: sum}
+  ad_watcher_on_day:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    computed_property: {select: 'if({ads_revenue_on_day} > 0, 1, 0)'}
+  was_ad_watcher_on_day:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{ad_watcher_on_day}'
+      value_mappings:
+      - {constant: 0, new_value: Didn't Watch Ads}
+      - {constant: 1, new_value: Watched Ads}
+  ad_watchers_lifetime:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    lifetime_property: {source_property: ad_watcher_on_day, merge_function: max}
+  was_ad_watcher_lifetime:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{ad_watchers_lifetime}'
+      value_mappings:
+      - {constant: 0, new_value: Non Payer lifetime}
+      - {constant: 1, new_value: Payer lifetime}
+  video_ads_watched:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    event_property: {
+      source_event: ad_revenue, 
+      select: 'count(*)', 
+      aggregate_function: none, 
+      default_value: 0}

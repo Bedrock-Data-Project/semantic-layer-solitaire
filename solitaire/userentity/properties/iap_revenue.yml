@@ -1,0 +1,69 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_properties.json
+properties:
+  iap_revenue_on_day:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    event_property: {source_event: revenue_amount, select: '{__price}', aggregate_function: sum, default_value: 0}
+  iap_revenue_last_28_days:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    sliding_window_property: {source_property: iap_revenue_on_day, window_function: sum, relative_days_from: -27, relative_days_to: 0}
+  iap_revenue_lifetime:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    lifetime_property: {source_property: iap_revenue_on_day, merge_function: sum}
+  iap_payment_segment:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{iap_revenue_lifetime}'
+      value_mappings:
+      - range: {to: 0}
+        new_value: Non Payer
+      - range: {from: 0, to: 20}
+        new_value: Minnow
+      - range: {from: 20, to: 100}
+        new_value: Dolphin
+      - range: {from: 100}
+        new_value: Whale
+  payers_on_day:
+    data_type: INTEGER
+    can_filter: false
+    can_group_by: false
+    computed_property: {select: 'if({iap_revenue_on_day} > 0, 1, 0)'}
+  was_payer_on_day:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{payers_on_day}'
+      value_mappings:
+      - {constant: 0, new_value: Non Payer on day}
+      - {constant: 1, new_value: Payer on day}
+  payers_lifetime:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: true
+    lifetime_property: {source_property: payers_on_day, merge_function: max}
+  was_payer_lifetime:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property:
+      select: '{payers_lifetime}'
+      value_mappings:
+      - {constant: 0, new_value: Non Payer lifetime}
+      - {constant: 1, new_value: Payer lifetime}
+  iap_transactions_count:
+    data_type: NUMBER
+    can_filter: true
+    can_group_by: false
+    event_property: {
+      source_event: revenue_amount, 
+      select: COUNT(*), 
+      aggregate_function: none, 
+      default_value: 0}
