@@ -1,0 +1,46 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_kpis.json
+kpis:
+  iap_revenue:
+    label: "IAP Revenue"
+    select: SUM({property.iap_revenue_on_day})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  arpdau:
+    label: "ARPDAU"
+    select: SAFE_DIVIDE({kpi.iap_revenue} * 100, {kpi.dau})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  iap_purchase_rate:
+    label: "IAP Purchase Rate"
+    select: SAFE_DIVIDE(SUM({property.payers_on_day}) * 100, {kpi.dau})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  cohort_conversion:
+    select: SAFE_DIVIDE(SUM({property.payers_lifetime}) * 100, SUM({property.cohort_size}))
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      cohort_day: {}
+  cohort_conversion_d{}:
+    select: SAFE_DIVIDE(SUM({property.payers_lifetime}) * 100, SUM({property.cohort_size}))
+    where: '{property.cohort_day} = {}'
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      date: {}
+    template: cohort_day
+  ltv:
+    label: "LTV"
+    select: SAFE_DIVIDE(SUM({property.iap_revenue_lifetime}) * 100, SUM({property.cohort_size}))
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      cohort_day: {}
+  ltv_d{}:
+    label: "LTV d{}"
+    select: SAFE_DIVIDE(SUM({property.iap_revenue_lifetime}) * 100, SUM({property.cohort_size}))
+    where: '{property.cohort_day} = {}'
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      date: {}
+    template: cohort_day

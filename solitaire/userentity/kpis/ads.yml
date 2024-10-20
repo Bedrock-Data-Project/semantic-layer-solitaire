@@ -1,0 +1,12 @@
+# $schema: http://schema.asemicanalytics.com/v1/semantic_layer/entity_kpis.json
+kpis:
+  ads_revenue:
+    select: SUM({property.ads_revenue_on_day})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  ads_watch_rate:
+    select: SAFE_DIVIDE(SUM({property.ad_watcher_on_day}) * 100, {kpi.dau})
+    x_axis:
+      date: {}
+      cohort_day: {}

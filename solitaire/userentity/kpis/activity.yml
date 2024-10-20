@@ -48,7 +48,7 @@ kpis:
     x_axis:
       date: {}
   average_logins:
-    select: SAFE_DIVIDE(SUM({property.logins}), SUM({kpi.dau}))
+    select: SAFE_DIVIDE(SUM({property.logins}), {kpi.dau})
     x_axis:
       date: {}
       cohort_day: {}

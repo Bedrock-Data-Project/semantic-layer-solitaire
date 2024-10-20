@@ -67,3 +67,32 @@ properties:
       select: COUNT(*), 
       aggregate_function: none, 
       default_value: 0}
+  first_transaction_day:
+    data_type: DATE
+    can_filter: true
+    can_group_by: true
+    lifetime_property:
+      source_event_property: {source_event: revenue_amount, select: '{date}', aggregate_function: min}
+      merge_function: min
+  last_transaction_day:
+    data_type: DATE
+    can_filter: true
+    can_group_by: true
+    lifetime_property:
+      source_event_property: {source_event: revenue_amount, select: '{date}', aggregate_function: max}
+      merge_function: max
+  previous_transaction_day:
+    data_type: DATE
+    can_filter: true
+    can_group_by: true
+    sliding_window_property: {source_property: last_transaction_day, window_function: max, relative_days_from: -1, relative_days_to: -1}
+  days_since_last_purchase:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: false
+    computed_property: {select: 'DATE_DIFF({date}, {previous_transaction_day}, DAY)'}
+  days_since_first_purchase:
+    data_type: INTEGER
+    can_filter: true
+    can_group_by: false
+    computed_property: {select: 'DATE_DIFF({date}, {first_transaction_day}, DAY)'}

@@ -14,7 +14,7 @@ properties:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    lifetime_property: {source_property: revenue_on_day, merge_function: sum}
+    lifetime_property: {source_property: ads_revenue_on_day, merge_function: sum}
   ad_watcher_on_day:
     data_type: INTEGER
     can_filter: false
@@ -27,8 +27,8 @@ properties:
     computed_property:
       select: '{ad_watcher_on_day}'
       value_mappings:
-      - {constant: 0, new_value: Didn't Watch Ads}
-      - {constant: 1, new_value: Watched Ads}
+      - {constant: 0, new_value: "Didn\\'t Watch Ads"}
+      - {constant: 1, new_value: "Watched Ads"}
   ad_watchers_lifetime:
     data_type: INTEGER
     can_filter: true
@@ -41,8 +41,8 @@ properties:
     computed_property:
       select: '{ad_watchers_lifetime}'
       value_mappings:
-      - {constant: 0, new_value: Non Payer lifetime}
-      - {constant: 1, new_value: Payer lifetime}
+      - {constant: 0, new_value: "Non Payer lifetime"}
+      - {constant: 1, new_value: "Payer lifetime"}
   video_ads_watched:
     data_type: NUMBER
     can_filter: true

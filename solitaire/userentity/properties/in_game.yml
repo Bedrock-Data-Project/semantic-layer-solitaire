@@ -4,37 +4,37 @@ properties:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet_coins}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet_coins}", aggregate_function: last_value}
   wallet_extra_cards:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet_extra_cards}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet_extra_cards}", aggregate_function: last_value}
   wallet_wildcard:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet_wildcard}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet_wildcard}", aggregate_function: last_value}
   wallet_undo:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet_undo}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet_undo}", aggregate_function: last_value}
   wallet__transform_joker_power_up:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet__transform_joker_power_up}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet__transform_joker_power_up}", aggregate_function: last_value}
   wallet__trash_can_power_up:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet__trash_can_power_up}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet__trash_can_power_up}", aggregate_function: last_value}
   wallet__broom_power_up:
     data_type: NUMBER
     can_filter: true
     can_group_by: false
-    event_property: {source_event: level_finished, select: {wallet__broom_power_up}, aggregate_function: last_value}
+    event_property: {source_event: level_finished, select: "{wallet__broom_power_up}", aggregate_function: last_value}
   levels_played:
     data_type: NUMBER
     can_filter: true
