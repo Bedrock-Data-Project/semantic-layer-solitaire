@@ -15,6 +15,7 @@ kpis:
   iap_purchase_rate:
     label: "IAP Purchase Rate"
     select: SAFE_DIVIDE(SUM({property.payers_on_day}) * 100, {kpi.dau})
+    unit: {symbol: '%', is_prefix: false}
     x_axis:
       date: {}
       cohort_day: {}

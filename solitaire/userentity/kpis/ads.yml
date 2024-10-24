@@ -5,8 +5,31 @@ kpis:
     x_axis:
       date: {}
       cohort_day: {}
-  ads_watch_rate:
-    select: SAFE_DIVIDE(SUM({property.ad_watcher_on_day}) * 100, {kpi.dau})
+  ads_watched:
+    select: SUM({property.video_ads_watched})
     x_axis:
       date: {}
       cohort_day: {}
+  ads_watch_rate:
+    select: SAFE_DIVIDE(SUM({property.ad_watcher_on_day}) * 100, {kpi.dau})
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      date: {}
+      cohort_day: {}
+  adsperdau:
+    label: "Ads per DAU"
+    select: SAFE_DIVIDE({kpi.ads_watched} * 100, {kpi.dau})
+    x_axis:
+      date: {}
+      cohort_day: {}
+  cohort_ad_watcher_conversion:
+    select: SAFE_DIVIDE(SUM({property.ad_watchers_lifetime}) * 100, SUM({property.cohort_size}))
+    unit: {symbol: '%', is_prefix: false}
+    x_axis:
+      cohort_day: {}
+  # lifetime_ads_watched:
+  #   label: "LTV"
+  #   select: SAFE_DIVIDE(SUM({property.iap_revenue_lifetime}) * 100, SUM({property.cohort_size}))
+  #   unit: {symbol: '%', is_prefix: false}
+  #   x_axis:
+  #     cohort_day: {}
