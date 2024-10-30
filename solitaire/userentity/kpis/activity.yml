@@ -25,7 +25,7 @@ kpis:
       date: {}
       cohort_day: {}
   mau_reactivated:
-    label: MAU Lost
+    label: MAU Reactivated
     select: SUM({property.mau_reactivated})
     x_axis:
       date: {}

@@ -61,3 +61,20 @@ properties:
     can_filter: true
     can_group_by: true
     event_property: {source_event: login_finished, select: 'COUNT(*)', aggregate_function: none, default_value: 0}
+  engagement_segment:
+    data_type: STRING
+    can_filter: true
+    can_group_by: true
+    computed_property: 
+      select: 'if({cohort_day} < 7, -1, {days_active_last_7_days})'
+      value_mappings:
+      - range: {to: -1}
+        new_value: New User
+      - range: {from: 0, to: 1}
+        new_value: In Danger
+      - range: {from: 2, to: 5}
+        new_value: Casual
+      - range: {from: 6, to: 7}
+        new_value: Core
+
+  
